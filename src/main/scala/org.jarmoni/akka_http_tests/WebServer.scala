@@ -5,6 +5,8 @@ import akka.http.scaladsl.Http
 import akka.http.scaladsl.model._
 import akka.http.scaladsl.server.Directives._
 import akka.stream.ActorMaterializer
+import com.typesafe.sslconfig.akka.AkkaSSLConfig
+
 import scala.io.StdIn
 
 object WebServer {
@@ -14,6 +16,7 @@ object WebServer {
     implicit val materializer = ActorMaterializer()
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext = system.dispatcher
+    val sslConfig = AkkaSSLConfig()
 
     val route =
       path("hello") {
