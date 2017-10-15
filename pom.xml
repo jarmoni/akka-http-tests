@@ -21,11 +21,15 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <scala.version>2.12.3</scala.version>
+        <scala.maj.version>2.12</scala.maj.version>
+        <scala.version>${scala.maj.version}.3</scala.version>
         <scala.maven.plugin.version>3.3.1</scala.maven.plugin.version>
         <!--akka -->
         <akka.stream.version>2.5.6</akka.stream.version>
         <akka.http.version>10.0.10</akka.http.version>
+        <swagger.akka.http.version>0.11.0</swagger.akka.http.version>
+        <scala.logging.version>3.7.2</scala.logging.version>
+        <logback.version>1.2.3</logback.version>
         <junit.version>4.11</junit.version>
     </properties>
 
@@ -53,13 +57,28 @@
     <dependencies>
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-stream_2.12</artifactId>
+            <artifactId>akka-stream_${scala.maj.version}</artifactId>
             <version>${akka.stream.version}</version>
         </dependency>
         <dependency>
             <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-http_2.12</artifactId>
+            <artifactId>akka-http_${scala.maj.version}</artifactId>
             <version>${akka.http.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.swagger-akka-http</groupId>
+            <artifactId>swagger-akka-http_${scala.maj.version}</artifactId>
+            <version>${swagger.akka.http.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.scala-logging</groupId>
+            <artifactId>scala-logging_${scala.maj.version}</artifactId>
+            <version>${scala.logging.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
     </dependencies>
 </project>
