@@ -11,6 +11,8 @@ import scala.io.StdIn
 
 object Server extends App  {
 
+  // https://blog.scalac.io/2015/07/30/websockets-server-with-akka-http.html
+
   implicit val actorSystem = ActorSystem("akka-system")
   implicit val flowMaterializer = ActorMaterializer()
 
@@ -34,14 +36,14 @@ object Server extends App  {
     case _ => TextMessage("Message type unsupported")
   }
 
-  val binding = Http().bindAndHandle(route, interface, port)
+  val bindingFuture = Http().bindAndHandle(route, interface, port)
 
   println(s"Server is now online at http://$interface:$port\nPress RETURN to stop...")
   StdIn.readLine()
 
   import actorSystem.dispatcher
 
-  binding.flatMap(_.unbind()).onComplete(_ => actorSystem.terminate())
+  bindingFuture.flatMap(_.unbind()).onComplete(_ => actorSystem.terminate())
   println("Server is down...")
 
 }
